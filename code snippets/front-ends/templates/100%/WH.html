@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+
+	<title>WH</title>
+	
+	<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+	<style type="text/css">
+
+*, img {
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
+.overflow {
+	overflow: auto;
+}
+
+.leftMenu {
+	width: 240px;
+	position:absolute;
+	left: 0;
+}
+
+.rightMenu {
+	position:absolute;
+	left: 240px;
+	right: 0;
+}
+
+.topMenu {
+	height: 60px;
+	position:absolute;
+	top:0;
+}
+
+.bottomMenu {
+	position:absolute;
+	top: 60px;
+	bottom: 0;
+}
+
+/**/
+#wrap { background: black; }
+
+/**/
+#btns { background: navy; }
+
+/**/
+#subjectTabs { background: lime; /*z-index: 99;*/ }
+
+/**/
+#subContents { background: fuchsia; }
+#categoryTabs { background: purple; }
+#category {
+	background: maroon;
+	width: inherit;
+	height: 100px;
+}
+#categoryContents {
+	background: teal;
+	width: inherit;
+	position:absolute;
+	top: 110px;
+	bottom: 50px;
+}
+#menuTabs {
+	background: gray;
+	width: inherit;
+	position:absolute;
+	bottom: 0;
+}
+
+/**/
+#contents { background: silver; }
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<div id="btns" class="topMenu leftMenu">
+			<a href="" class=""><img src="" alt="home" width="55px" height="50px" /></a>
+			<a href="" class=""><img src="" alt="edit" width="55px" height="50px" /></a>
+		</div>
+		<div id="subjectTabs" class="overflow topMenu rightMenu">
+			<a href="" class=""><img src="" alt="1" width="100px" height="45px" /></a>
+			<a href="" class=""><img src="" alt="2" width="100px" height="45px" /></a>
+			<a href="" class=""><img src="" alt="3" width="100px" height="45px" /></a>
+			<a href="" class=""><img src="" alt="4" width="100px" height="45px" /></a>
+			<a href="" class=""><img src="" alt="5" width="100px" height="45px" /></a>
+			<a href="" class=""><img src="" alt="6" width="100px" height="45px" /></a>
+			<a href="" class=""><img src="" alt="7" width="100px" height="45px" /></a>
+		</div>
+		<div id="subContents" class="bottomMenu leftMenu">
+			<div id="categoryTabs">
+				<a href="" class=""><img src="" alt="keywordSearch" width="115px" height="45px" /></a>
+				<a href="" class=""><img src="" alt="subjectSearch" width="115px" height="45px" /></a>
+			</div>
+			<div id="category">
+				roller
+			</div>
+			<div id="categoryContents" class="overflow">
+				a<br />b<br />c<br />d<br />e<br />f<br />
+				g<br />h<br />i<br />j<br />k<br />l<br />
+				m<br />n<br />o<br />p<br />q<br />r<br />
+				s<br />t<br />u<br />v<br />w<br />x<br />
+				y<br />z<br />a<br />b<br />c<br />d<br />
+			</div>
+			<div id="menuTabs">
+				<a href="" class=""><img src="" alt="" width="115px" height="45px" /></a>
+				<a href="" class=""><img src="" alt="" width="115px" height="45px" /></a>
+			</div>
+		</div>
+		<div id="contents" class="overflow bottomMenu rightMenu">
+			a<br />b<br />c<br />d<br />e<br />f<br />
+			g<br />h<br />i<br />j<br />k<br />l<br />
+			m<br />n<br />o<br />p<br />q<br />r<br />
+			s<br />t<br />u<br />v<br />w<br />x<br />
+			y<br />z<br />a<br />b<br />c<br />d<br />
+		</div>
+	</div>
+</body>
+</html>
