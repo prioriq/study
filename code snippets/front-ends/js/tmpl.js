@@ -31,5 +31,11 @@ var QsTemplate = function () {
 /*global $, DBHandler, TWIS */
 
 
+try {
+	// do something that might go wrong
+} catch(e) {
+	var xcb = 'http://stackoverflow.com/search?q=[js]+' + e.message;
+	window.open(xcb, '_blank');
+}
 
 }());

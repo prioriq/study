@@ -1,0 +1,31 @@
+	<!-- <![CDATA[ -->
+	<!-- ]]> -->
+
+	<select id="select" resultMap="" parameterType="">
+		SELECT
+			
+		FROM 
+		WHERE
+			
+	</select>
+
+	<insert id="insert" parameterType="">
+		INSERT INTO 
+			()
+		VALUES
+			()
+	</insert>
+
+	<update id="update" parameterType="">
+		UPDATE 
+		SET
+			
+		WHERE
+			
+	</update>
+
+	<delete id="delete" parameterType="">
+		DELETE FROM 
+		WHERE
+			
+	</delete>

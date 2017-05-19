@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <title>Simple Map</title>
+
+    <style>
+html, body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    width: 100%; height: 300%;
+    background: #f1f1f1;
+}
+.map { margin: 20px 0; width: 100%; height: 200px; }
+    </style>
+
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script> -->
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=TRUE"></script>
+</head>
+<body>
+    <div id="mapCanvas" class="map"></div>
+    <div id="mapCanvas2" class="map"></div>
+
+    <script>
+var map, map2;
+
+var TmonGoogleMap = function (targetElId, mapOptions){
+    this.map = {};
+    this.mapOptions = mapOptions || {};
+    this.markers = [];
+
+    if(typeof targetElId != 'string'){
+        console.log(typeof targetElId); return;
+    } else if(typeof this.mapOptions != 'object'){
+        console.log(typeof this.mapOptions); return;
+    }
+
+    // set option values if required field is null
+    if(this.mapOptions.center == null){
+        // this.mapOptions.center = this.getCurrentLatLng();
+        if(!!this.mapOptions.center) {
+            console.error(this.mapOptions.center); return;
+        }
+    }
+    if(this.mapOptions.zoom == null){
+        this.mapOptions.zoom = 16;
+    }
+
+    // set default option values
+    if(this.mapOptions.draggable == null){
+        this.mapOptions.draggable = false;
+    }
+    if(this.mapOptions.disableDefaultUI == null){
+        this.mapOptions.disableDefaultUI = true;
+    }
+    if(this.mapOptions.disableDoubleClickZoom == null){
+        this.mapOptions.disableDoubleClickZoom = true;
+    }
+
+    this.map = new google.maps.Map($('#'+targetElId)[0], mapOptions);
+    return this;
+};
+// TmonGoogleMap.prototype.API_KEY = 'AIzaSyC-dX3AmiD0AbEOUadgKNwPkvEBWxNTiKc';
+TmonGoogleMap.prototype.constructor = 'TmonGoogleMap';
+TmonGoogleMap.prototype.addMarker = function (markerOptions){
+    var m
+      , markerOptions = markerOptions || {};
+
+    if(markerOptions.position == null){
+        console.warn('can\'t create marker; no position', markerOptions.position);
+        return;
+    } else if(markerOptions.title == null){
+        console.warn('can\'t create marker; no title');
+        // markerOptions.title = 'no title';
+        return;
+    }
+
+    markerOptions.map = this.map;
+    m = new google.maps.Marker(markerOptions);
+    this.markers.push(m);
+    google.maps.event.addListener(m, 'click', function (){
+        var infowindow = new google.maps.InfoWindow( 
+                { content: m.title, size: new google.maps.Size(300,100) }
+            );
+        infowindow.open(this.map, m);
+    });
+}
+
+$(window).on('load', function (){
+// google.maps.event.addDomListener(window, 'load', function (){
+    var target = {lat: 37.507467, lng: 127.06668919999998};
+    map = new TmonGoogleMap('mapCanvas', {center: target});
+    map.addMarker({
+        position: target,
+        title: 'tmon'
+    });
+
+    var target2 = {lat: 37.56598, lng: 126.9804};
+    map2 = new TmonGoogleMap('mapCanvas2', {center: target2});
+    map2.addMarker({
+        position: target2,
+        // title: 'tmon2'
+    });
+
+// orientationchange와 resize의 타이밍이 다름..
+// setTimeout(); 하지 않으면 정상적으로 동작 안함. 위 두 이벤트에 걸어줘야 하는 시간 또한 다름.
+    $(window).on('resize'/* || 'orientationchange'*/, function (){
+//target은 closure var... 메모리 낭비 생길까?
+        // map.map.panTo(target);
+        setTimeout(function (){ map.map.panTo(target); }, 1);
+    });
+});
+
+// TmonGoogleMap.prototype.getCurrentLatLng = function () {
+//     var retObj = null;
+//     if (navigator.geolocation) {
+//         navigator.geolocation.getCurrentPosition(function (pos) {
+//             var latitude = pos.coords.latitude;
+//             var longitude = pos.coords.longitude;
+
+//             retObj = { lat: latitude,lng: longitude };
+//         }, function (error) {
+//             switch (error.code) {
+//             case 1:
+//                 console.log("User denied the request for Geolocation.");
+//                 break;
+//             case 2:
+//                 console.log("Location information is unavailable.");
+//                 break;
+//             case 3:
+//                 console.log("The request to get user location timed out.");
+//                 break;
+//             case 0:
+//                 console.log("An unknown error occurred.");
+//                 break;
+//             }
+//         });
+//     } else {
+//         console.log("Geolocation is not supported by this browser.");
+//     }
+//     console.dir(retObj);
+//     return retObj;
+//     // setTimeout(function() {panTo()}, 3000);
+// }
+    </script>
+</body>
+</html>
